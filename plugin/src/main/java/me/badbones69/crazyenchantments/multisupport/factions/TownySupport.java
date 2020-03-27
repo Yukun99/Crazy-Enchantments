@@ -9,11 +9,12 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class TownySupport implements FactionPlugin {
+    TownyUniverse universe = TownyUniverse.getInstance();
     
     public boolean inTerritory(Player player) {
         try {
             TownBlock block = WorldCoord.parseWorldCoord(player).getTownBlock();
-            Resident playerUser = TownyUniverse.getDataSource().getResident(player.getName());
+            Resident playerUser = universe.getDataSource().getResident(p.getName());
             if (playerUser.hasTown() && playerUser.getTown().hasTownBlock(block)) {
                 return true;
             }
@@ -24,8 +25,8 @@ public class TownySupport implements FactionPlugin {
     
     public boolean isFriendly(Player player, Player other) {
         try {
-            Resident playerUser = TownyUniverse.getDataSource().getResident(player.getName());
-            Resident otherUser = TownyUniverse.getDataSource().getResident(other.getName());
+            Resident playerUser = universe.getDataSource().getResident(player.getName());
+            Resident otherUser = universe.getDataSource().getResident(other.getName());
             if (playerUser.hasTown() && otherUser.hasTown() && playerUser.getTown().getName().equalsIgnoreCase(otherUser.getTown().getName())) {
                 return true;
             }
